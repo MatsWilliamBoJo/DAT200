@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Drawing</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;"></canvas>
+    <script>
+  var canvas = document.getElementById("myCanvas");
+  var ctx = canvas.getContext("2d");
+
+
+    // Draw sky
+    ctx.fillStyle = "#87CEEB"; // Light blue color for the sky
+    ctx.fillRect(0, 0, 600, 500);
+    ctx.fillStyle = "#FFFFFF"; // White color for the clouds
+    ctx.beginPath();
+    ctx.arc(100, 100, 30, 0, Math.PI * 2);
+    ctx.arc(150, 100, 40, 0, Math.PI * 2);
+    ctx.arc(200, 100, 30, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#FFD700"; // Yellow color for the sun
+    ctx.beginPath();
+    ctx.arc(500, 100, 40, 0, Math.PI * 2); // Sun
+    ctx.fill();
+
+    //Draw background mountains
+    ctx.fillStyle = "#A9A9A9"; // Dark gray color for the mountains
+    ctx.beginPath();
+    ctx.moveTo(0, 500);
+    ctx.lineTo(100, 300);
+    ctx.lineTo(200, 500);
+    ctx.closePath();
+    ctx.fill();
+
+    //Draw ground
+    ctx.fillStyle = "#228B22"; // Green color for the ground
+    ctx.fillRect(0, 500, 600, 100); // Ground
+
+    // Draw a house
+    ctx.fillStyle = "#808080"; // Grey color for the house
+    ctx.fillRect(200, 300, 200, 200); // House base
+
+    ctx.fillStyle = "#B22222"; // Brick red for the roof
+    ctx.beginPath();
+    ctx.moveTo(150, 300);
+    ctx.lineTo(300, 200);
+    ctx.lineTo(450, 300);
+    ctx.closePath();
+    ctx.fill();
+
+    // Draw a door
+    ctx.fillStyle = "#654321"; // Dark brown color for the door
+    ctx.fillRect(275, 400, 50, 100);
+    ctx.fillStyle = "#C0C0C0"; // Silver color for the door handle
+    ctx.beginPath();
+    ctx.arc(285, 450, 5, 0, Math.PI * 2); // Door handle
+    ctx.fill();
+
+    // Draw windows
+    ctx.fillStyle = "#ADD8E6"; // Light blue color for the windows
+    ctx.fillRect(225, 350, 50, 50);
+    ctx.fillRect(325, 350, 50, 50);
+</script>
+</body>
