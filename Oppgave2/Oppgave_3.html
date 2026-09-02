@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave 3 - Firkanter</title>
+
+    <style>
+        body {
+            background-color: #202938;
+            margin: 20px;
+        }
+
+        canvas {
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<canvas id="canvas" width="800" height="800"></canvas>
+
+<script>
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+ctx.strokeStyle = "black";
+ctx.lineWidth = 1;
+
+
+// Tegner én firkantspiral
+function drawSquare(x, y, size) {
+
+    // Hjørnene på den første firkanten
+    let x1 = x;
+    let y1 = y;
+
+    let x2 = x + size;
+    let y2 = y;
+
+    let x3 = x + size;
+    let y3 = y + size;
+
+    let x4 = x;
+    let y4 = y + size;
+
+
+    // Tegner firkanter inni firkanter
+    for (let i = 0; i < 35; i++) {
+
+        // Tegn firkanten
+        ctx.beginPath();
+
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.lineTo(x3, y3);
+        ctx.lineTo(x4, y4);
+        ctx.closePath();
+
+        ctx.stroke();
+
+
+        // Hvor mye hvert hjørne flyttes
+        const move = 0.08;
+
+        // Finn nye hjørner
+        const newX1 = x1 + (x2 - x1) * move;
+        const newY1 = y1 + (y2 - y1) * move;
+
+        const newX2 = x2 + (x3 - x2) * move;
+        const newY2 = y2 + (y3 - y2) * move;
+
+        const newX3 = x3 + (x4 - x3) * move;
+        const newY3 = y3 + (y4 - y3) * move;
+
+        const newX4 = x4 + (x1 - x4) * move;
+        const newY4 = y4 + (y1 - y4) * move;
+
+
+        // Erstatt de gamle hjørnene
+        x1 = newX1;
+        y1 = newY1;
+
+        x2 = newX2;
+        y2 = newY2;
+
+        x3 = newX3;
+        y3 = newY3;
+
+        x4 = newX4;
+        y4 = newY4;
+    }
+}
+
+
+// Tegner 4 x 4 mønster
+function draw() {
+
+    const size = 200;
+
+    for (let row = 0; row < 4; row++) {
+
+        for (let col = 0; col < 4; col++) {
+
+            const x = col * size;
+            const y = row * size;
+
+            drawSquare(x, y, size);
+        }
+    }
+}
+
+
+draw();
+
+</script>
+
+</body>
+
+</html>

@@ -6,37 +6,95 @@
     <title>Kunst</title>
 </head>
 <body>
-    <canvas id="myCanvas"></canvas>
 
-    <scrip>
-        <form>
-<label for="antall">Antall punkter</label>
-<select id="antall" onchange="draw()">
-<option>16</option>
-<option>32</option>
-<option>64</option>
-<option>128</option>
-<option>256</option>
-<option>512</option>
+
+    <form>
+<label for="amount">Antall punkter</label>
+<select id="amount" onchange="draw()">
+    <option>16</option>
+    <option>32</option>
+    <option>64</option>
+    <option>128</option>
+    <option>256</option>
+    <option>512</option>
 </select>
+
+
 <label for="k">x til kx</label>
 <select id="k" onchange="draw()">
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>max</option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+    <option>6</option>
+    <option>max</option>
 </select>
 <br />
 <br />
 </form>
+<canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const amount = Number(document.getElementById("amount").value);
+    const kValue = document.getElementById("k").value;
+
+    const a = 200;
+    const b = 200;
+
+    const centerX = 400;
+    const centerY = 300;
+
+    const angleStep = 2 * Math.PI / amount;
+
+    // Tegn sirkelen
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, a, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    // Tegn kunstlinjene
+    ctx.beginPath();
+
+    for (let i = 0; i < amount; i++) {
+        // Punkt 1
+        const v1 = i * angleStep;
+        const x1 = centerX + a * Math.cos(v1);
+        const y1 = centerY + b * Math.sin(v1);
+
+        // Punkt 2
+        let k = Number(kValue);
+
+        if (kValue === "max") {
+            k = amount - 1;
+        }
+
+        let next = i * k;
+        next = next % amount;
+
+        const v2 = next * angleStep;
+        const x2 = centerX + a * Math.cos(v2);
+        const y2 = centerY + b * Math.sin(v2);
+
+        // Linje mellom punktene
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+    }
+
+    ctx.stroke();
+}
 
 
 
 
-
+// Draw first time when the page opens
+draw();
     </script>
 </body>
 </html>
