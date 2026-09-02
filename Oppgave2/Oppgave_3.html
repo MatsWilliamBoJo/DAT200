@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Oppgave 3 - Firkanter</title>
+    <title>Squares</title>
 
     <style>
         body {
@@ -30,10 +30,10 @@ ctx.strokeStyle = "black";
 ctx.lineWidth = 1;
 
 
-// Tegner én firkantspiral
+// Square drawing function
 function drawSquare(x, y, size) {
 
-    // Hjørnene på den første firkanten
+    // corner points of the first square
     let x1 = x;
     let y1 = y;
 
@@ -47,10 +47,10 @@ function drawSquare(x, y, size) {
     let y4 = y + size;
 
 
-    // Tegner firkanter inni firkanter
+    // Draw squares inside squares
     for (let i = 0; i < 35; i++) {
 
-        // Tegn firkanten
+        // Draw the square
         ctx.beginPath();
 
         ctx.moveTo(x1, y1);
@@ -62,10 +62,10 @@ function drawSquare(x, y, size) {
         ctx.stroke();
 
 
-        // Hvor mye hvert hjørne flyttes
+        // How much each corner moves
         const move = 0.08;
 
-        // Finn nye hjørner
+        // Find new corners
         const newX1 = x1 + (x2 - x1) * move;
         const newY1 = y1 + (y2 - y1) * move;
 
@@ -78,8 +78,7 @@ function drawSquare(x, y, size) {
         const newX4 = x4 + (x1 - x4) * move;
         const newY4 = y4 + (y1 - y4) * move;
 
-
-        // Erstatt de gamle hjørnene
+        // Replace old corners
         x1 = newX1;
         y1 = newY1;
 
@@ -95,7 +94,7 @@ function drawSquare(x, y, size) {
 }
 
 
-// Tegner 4 x 4 mønster
+// Draw 4 x 4 pattern
 function draw() {
 
     const size = 200;
