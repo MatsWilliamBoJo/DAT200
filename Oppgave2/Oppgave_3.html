@@ -31,20 +31,32 @@ ctx.lineWidth = 1;
 
 
 // Square drawing function
-function drawSquare(x, y, size) {
+function drawSquare(x, y, size, mirrored) {
+
+    ctx.save();
+
+    // Flytt til riktig firkant
+    ctx.translate(x, y);
+
+    // Speilvend annenhver firkant
+    if (mirrored) {
+        ctx.translate(size, 0);
+        ctx.scale(-1, 1);
+    }
+
 
     // corner points of the first square
-    let x1 = x;
-    let y1 = y;
+    let x1 = 0;
+    let y1 = 0;
 
-    let x2 = x + size;
-    let y2 = y;
+    let x2 = size;
+    let y2 = 0;
 
-    let x3 = x + size;
-    let y3 = y + size;
+    let x3 = size;
+    let y3 = size;
 
-    let x4 = x;
-    let y4 = y + size;
+    let x4 = 0;
+    let y4 = size;
 
 
     // Draw squares inside squares
@@ -91,6 +103,8 @@ function drawSquare(x, y, size) {
         x4 = newX4;
         y4 = newY4;
     }
+
+    ctx.restore();
 }
 
 
@@ -106,7 +120,10 @@ function draw() {
             const x = col * size;
             const y = row * size;
 
-            drawSquare(x, y, size);
+            // Mirrored every other square
+            const mirrored = (row + col) % 2 === 1;
+
+            drawSquare(x, y, size, mirrored);
         }
     }
 }
